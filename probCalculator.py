@@ -1,3 +1,5 @@
+from random import randint
+
 class Hat:
     def __init__(self, **balls):
         self.contents = []
@@ -5,8 +7,6 @@ class Hat:
             for ball in range(number):
                 self.contents.append(color)
 
-        print('BALLS:', balls.items())
-            # print('CONTENTS:', self.contents)
 
 
 Hat(yellow=3, blue=2, green=6)
