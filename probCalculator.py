@@ -24,6 +24,9 @@ class Hat:
         contentsCopy.remove(contentsCopy[index])
       return pulledFromHat
     
+def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
+  return
+    
 
 Hat(yellow=3, blue=2, green=6)
 Hat(red=5, orange=4)
