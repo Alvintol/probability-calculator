@@ -1,4 +1,5 @@
 from random import randint
+from copy import copy
 
 class Hat:
     def __init__(self, **balls):
@@ -9,7 +10,7 @@ class Hat:
 
     def draw(self, num):
       ballsToDraw = num
-      contentsCopy = self.contents
+      contentsCopy = copy(self.contents)
       
       return
 
