@@ -7,7 +7,11 @@ class Hat:
             for ball in range(number):
                 self.contents.append(color)
 
-
+    def draw(self, num):
+      ballsToDraw = num
+      contentsCopy = self.contents
+      
+      return
 
 Hat(yellow=3, blue=2, green=6)
 Hat(red=5, orange=4)
