@@ -1,3 +1,4 @@
+import random 
 import copy
 from random import randint
 from copy import copy
@@ -25,7 +26,13 @@ class Hat:
       return pulledFromHat
     
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-  return
+  expectedOutcome = 0
+  experimentsRan = 0
+  
+  
+  
+  return expectedOutcome / num_experiments
+
     
 
 Hat(yellow=3, blue=2, green=6)
