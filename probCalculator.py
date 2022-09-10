@@ -1,3 +1,4 @@
+import copy
 from random import randint
 from copy import copy
 
@@ -9,10 +10,20 @@ class Hat:
                 self.contents.append(color)
 
     def draw(self, num):
-      ballsToDraw = num
+      numToDraw = num
       contentsCopy = copy(self.contents)
+      pulledFromHat = []
       
-      return
+      while numToDraw > 0:
+        if len(contentsCopy) == 0:
+          contentsCopy = copy(self.contents)
+        
+        index = randint(1, numToDraw)   
+        ballPulled = contentsCopy[index]
+        pulledFromHat.append(ballPulled)
+        contentsCopy.remove(contentsCopy[index])
+      return pulledFromHat
+    
 
 Hat(yellow=3, blue=2, green=6)
 Hat(red=5, orange=4)
