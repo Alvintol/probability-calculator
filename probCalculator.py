@@ -32,20 +32,22 @@ class Hat:
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     expectedOutcome = 0
     experimentsRan = 0
+    ballsNeeded = []
+
+    ballsNeeded = [ball for ball in expected_balls]
+
+    print('BALLSNEEDED:', ballsNeeded)
 
     while experimentsRan <= num_experiments:
         ballsDrawn = hat.draw(num_balls_drawn)
         drawnTotal = {}
-        print('DRAWNTOTAL1:', drawnTotal)
 
         for ball in ballsDrawn:
-            print('BALL:', ball)
+            # print('BALL:', ball)
             if ball in drawnTotal:
                 drawnTotal[ball] += 1
             else:
                 drawnTotal[ball] = 1
-                
-        print('DRAWNTOTAL2:', drawnTotal)
 
         # for expectedBall, value in expected_balls.items():
 
