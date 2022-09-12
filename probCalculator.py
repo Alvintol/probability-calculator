@@ -51,7 +51,8 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
         for total in drawnTotal:
           neededTotals[total] = drawnTotal[total]
         
-        
+        if drawnTotal == neededTotals:
+          expectedOutcome += 1
 
         experimentsRan += 1
 
