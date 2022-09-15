@@ -42,17 +42,16 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
         neededTotals = {}
 
         for ball in ballsDrawn:
-            # print('BALL:', ball)
             if ball in drawnTotal:
                 drawnTotal[ball] += 1
             else:
                 drawnTotal[ball] = 1
 
         for total in drawnTotal:
-          neededTotals[total] = drawnTotal[total]
-        
-        if drawnTotal == neededTotals:
-          expectedOutcome += 1
+            neededTotals[total] = drawnTotal[total]
+
+        for item, value in neededTotals.items():
+            print('ITEM:', item, value)
 
         experimentsRan += 1
 
