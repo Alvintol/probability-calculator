@@ -15,8 +15,10 @@ class Hat:
         numToDraw = num
         contentsCopy = copy(self.contents)
         pulledFromHat = []
+        drawnTotal = {}
+        
 
-        while numToDraw > 0:
+        while numToDraw >= 0:
             if len(contentsCopy) == 0:
                 contentsCopy = copy(self.contents)
 
@@ -25,8 +27,15 @@ class Hat:
             pulledFromHat.append(ballPulled)
             contentsCopy.pop(index)
             numToDraw -= 1
-
-        return pulledFromHat
+        
+            for ball in pulledFromHat:
+                if ball in drawnTotal:
+                    drawnTotal[ball] += 1
+                else:
+                    drawnTotal[ball] = 1
+                
+        
+        return [ball for ball in pulledFromHat]
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
@@ -38,22 +47,28 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
 
     while experimentsRan <= num_experiments:
         ballsDrawn = hat.draw(num_balls_drawn)
-        drawnTotal = {}
-        neededTotals = {}
-
-        for ball in ballsDrawn:
-            if ball in drawnTotal:
-                drawnTotal[ball] += 1
-            else:
-                drawnTotal[ball] = 1
-
-        for total in drawnTotal:
-            neededTotals[total] = drawnTotal[total]
-
-        for item, value in neededTotals.items():
-            print('ITEM:', item, value)
-
+        # neededTotals = {}
         experimentsRan += 1
+
+
+        # for total in drawnTotal:
+        #     neededTotals[total] = drawnTotal[total]
+
+        # for item, value in neededTotals.items():
+            
+        #     print('ITEM:', item, value)
+        
+        # for ball, ballValue in expected_balls.items():
+        #     for drawn, drawnValue in drawnTotal.items():
+        #         if drawnValue <= ballValue:
+        #             continue
+        
+        expectedOutcome += 1
+        
+        # print('BALLSNEEDED:', ballsNeeded)
+        # print('EXPECTEDBALLS:', expected_balls)
+        # print('DDRAWNTOTAL:', drawnTotal)
+
 
     return expectedOutcome / num_experiments
 
