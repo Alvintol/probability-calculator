@@ -16,26 +16,26 @@ class Hat:
         contentsCopy = copy(self.contents)
         pulledFromHat = []
         drawnTotal = {}
-        
 
-        while numToDraw >= 0:
-            if len(contentsCopy) == 0:
-                contentsCopy = copy(self.contents)
+        if num > len(contentsCopy):
+            return self.contents
+        else:
+            while len(contentsCopy) >= num:
+                index = randint(0, len(contentsCopy) - 1)
+                ballPulled = contentsCopy[index]
+                pulledFromHat.append(ballPulled)
+                contentsCopy.remove(contentsCopy[index])
+                numToDraw -= 1
 
-            index = randint(0, len(contentsCopy) - 1)
-            ballPulled = contentsCopy[index]
-            pulledFromHat.append(ballPulled)
-            contentsCopy.pop(index)
-            numToDraw -= 1
-        
-            for ball in pulledFromHat:
-                if ball in drawnTotal:
-                    drawnTotal[ball] += 1
-                else:
-                    drawnTotal[ball] = 1
-                
-        
-        return [ball for ball in pulledFromHat]
+                for ball in pulledFromHat:
+                    if ball in drawnTotal:
+                        drawnTotal[ball] += 1
+                    else:
+                        drawnTotal[ball] = 1
+
+        print('PULLEDFROMHAT:', [ball for ball in drawnTotal])
+        print('PULLEDFROMHAT:', pulledFromHat)
+        return [ball for ball in drawnTotal]
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
@@ -45,30 +45,28 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
 
     ballsNeeded = [ball for ball in expected_balls]
 
-    while experimentsRan <= num_experiments:
-        ballsDrawn = hat.draw(num_balls_drawn)
-        # neededTotals = {}
-        experimentsRan += 1
+    # while experimentsRan <= num_experiments:
+    #     ballsDrawn = hat.draw(num_balls_drawn)
+    #     # neededTotals = {}
+    #     experimentsRan += 1
 
+    #     # for total in drawnTotal:
+    #     #     neededTotals[total] = drawnTotal[total]
 
-        # for total in drawnTotal:
-        #     neededTotals[total] = drawnTotal[total]
+    #     # for item, value in neededTotals.items():
 
-        # for item, value in neededTotals.items():
-            
-        #     print('ITEM:', item, value)
-        
-        # for ball, ballValue in expected_balls.items():
-        #     for drawn, drawnValue in drawnTotal.items():
-        #         if drawnValue <= ballValue:
-        #             continue
-        
-        expectedOutcome += 1
-        
-        # print('BALLSNEEDED:', ballsNeeded)
-        # print('EXPECTEDBALLS:', expected_balls)
-        # print('DDRAWNTOTAL:', drawnTotal)
+    #     #     print('ITEM:', item, value)
 
+    #     # for ball, ballValue in expected_balls.items():
+    #     #     for drawn, drawnValue in drawnTotal.items():
+    #     #         if drawnValue <= ballValue:
+    #     #             continue
+
+    #     expectedOutcome += 1
+
+    #     # print('BALLSNEEDED:', ballsNeeded)
+    #     # print('EXPECTEDBALLS:', expected_balls)
+    #     # print('DDRAWNTOTAL:', drawnTotal)
 
     return expectedOutcome / num_experiments
 
