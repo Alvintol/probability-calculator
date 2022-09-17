@@ -13,18 +13,17 @@ class Hat:
 
     def draw(self, num):
         numToDraw = num
-        contentsCopy = copy(self.contents)
         pulledFromHat = []
         drawnTotal = {}
 
-        if num > len(contentsCopy):
+        if num > len(self.contents):
             return self.contents
         else:
-            while len(contentsCopy) >= num:
-                index = randint(0, len(contentsCopy) - 1)
-                ballPulled = contentsCopy[index]
+            while numToDraw > 0:
+                randomIndex = randint(0, len(self.contents) - 1)
+                ballPulled = self.contents[randomIndex]
                 pulledFromHat.append(ballPulled)
-                contentsCopy.remove(contentsCopy[index])
+                self.contents.remove(self.contents[randomIndex])
                 numToDraw -= 1
 
                 for ball in pulledFromHat:
@@ -33,9 +32,10 @@ class Hat:
                     else:
                         drawnTotal[ball] = 1
 
-        print('PULLEDFROMHAT:', [ball for ball in drawnTotal])
         print('PULLEDFROMHAT:', pulledFromHat)
-        return [ball for ball in drawnTotal]
+        print('NUMBEROFCONTENTS:', len(self.contents))
+        print('CONTENTS:', self.contents)
+        return pulledFromHat
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
