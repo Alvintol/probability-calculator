@@ -1,7 +1,7 @@
 import random
 import copy
 from random import randint
-from copy import copy
+from copy import deepcopy
 
 
 class Hat:
@@ -31,37 +31,29 @@ class Hat:
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     expectedOutcome = 0
     experimentsRan = 0
-    ballsDrawn = hat.draw(num_balls_drawn)
-    ballsNeeded = [ball for ball in expected_balls]
-    drawnTotal = {}
 
-    for ball in ballsDrawn:
-        if ball in drawnTotal:
-            drawnTotal[ball] += 1
-        else:
-            drawnTotal[ball] = 1
+    for experiment in range(num_experiments):
+        hatCopy = deepcopy(hat)
+        ballsDrawn = hatCopy.draw(int(num_balls_drawn))
+        drawnTotal = {}
+        success = True
 
-    print('EXPECTEDBALLS:', expected_balls)
-    print('BALLSDDRAWN:', ballsDrawn)
-    print('BALLSNEEDED:', ballsNeeded)
-    print('DDRAWNTOTAL:', drawnTotal)
-    while experimentsRan <= num_experiments:
-        #     neededTotals = {}
-        experimentsRan += 1
-
-    #     for total in drawnTotal:
-    #         neededTotals[total] = drawnTotal[total]
+        for ball in ballsDrawn:
+            if ball in drawnTotal:
+                drawnTotal[ball] += 1
+            else:
+                drawnTotal[ball] = 1
 
         for ball, ballValue in expected_balls.items():
-            # for drawn in drawnTotal.items():
-            print('BALL:', ball)
-            print('EXPECTED:', expected_balls[ball])
-            print('DRAWN:', drawnTotal[ball])
-            if ball not in drawnTotal.keys() or expected_balls[ball] <= drawnTotal[ball]:
-                continue
-        expectedOutcome += 1
+            if ball not in drawnTotal.keys() or drawnTotal.get(ball) < expected_balls.get(ball):
+                success = False
+                break
+        if success == True:
+            expectedOutcome += 1
 
-    return expectedOutcome / num_experiments
+        experimentsRan += 1
+        
+    return expectedOutcome/experimentsRan
 
 
 hat1 = Hat(yellow=3, blue=2, green=6)
